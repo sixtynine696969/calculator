@@ -3,3 +3,12 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.output {
+    border: 1px solid black;
+    height: 20px;
+}
+
+button {
+    padding: 5px;
+}
