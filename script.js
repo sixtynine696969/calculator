@@ -31,10 +31,10 @@ function operate(operator, num1, num2) {
     }
 }
 
-let num = '3 / 5';
-let arr = num.split(' ');
-let num1 = arr[0];
-let operator = arr[1];
-let num2 = arr[2];
-
-console.log(operate(operator, num1, num2));
+// function compute(string) {
+//     arr = string.split(' ');
+//     const num1 = arr[0];
+//     const operator = arr[1];
+//     const num2 =  arr[2];
+//     return operate(operator, num1, num2);
+// }
