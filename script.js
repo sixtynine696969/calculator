@@ -38,3 +38,54 @@ function operate(operator, num1, num2) {
 //     const num2 =  arr[2];
 //     return operate(operator, num1, num2);
 // }
+
+// const output = document.querySelector('.output')
+// const buttons = document.querySelectorAll('button')
+
+// let clicks = 0
+
+// buttons.forEach(btn => {
+//     btn.addEventListener('click', i => {
+        
+
+//         if (i.target.textContent == '=') {
+//             switch(true) {
+//                 case output.textContent.includes('x'):
+//                 case output.textContent.includes('/'):
+//                 case output.textContent.includes('-'):
+//                 case output.textContent.includes('+'):
+//                     output.textContent = compute(output.textContent);
+//             }
+//             return
+//         }
+        
+//         if (output.textContent.trim().split(' ').length > 2) {
+//             output.textContent = compute(output.textContent)
+//         }
+//         switch(i.target.textContent) {
+//             case '/':
+//                 output.textContent += ' / ';
+//                 break;
+//             case 'x':
+//                 output.textContent += ' x ';
+//                 break;
+//             case '-':
+//                 output.textContent += ' - ';
+//                 break;
+//             case '+':
+//                 output.textContent += ' + ';
+//                 break;
+//             default:
+//                 output.textContent += i.target.textContent;
+//                 break;
+//         }
+//     }) 
+// })
+
+// let num = '3 / 5';
+// let arr = num.split(' ');
+// let num1 = arr[0];
+// let operator = arr[1];
+// let num2 = arr[2];
+
+// console.log(operate(operator, num1, num2));
