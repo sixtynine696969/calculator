@@ -23,7 +23,6 @@ function operate(operator, num1, num2) {
             return add(num1, num2);
         case '-':
             return subtract(num1, num2);
-        case 'x':
         case '*':
             return multiply(num1, num2);
         case '/':
@@ -34,13 +33,33 @@ function operate(operator, num1, num2) {
 const buttons = document.querySelectorAll('button');
 const output = document.querySelector('.output');
 
+let num = null;
+let operator = null;
+
 buttons.forEach(button => {
     button.addEventListener('click', i => {
-        const buttonText = i.target.textContent;
-        const displayValue = output.textContent;
+        const buttonValue = i.target.textContent;
+        const outputValue = output.textContent;
+        
+        if (!isNaN(+buttonValue)) {
+            output.textContent += buttonValue;
+        }
 
-        if (!isNaN(+buttonText)) {
-            output.textContent += buttonText;
+        switch (buttonValue) {
+            case '/':
+            case '*':
+            case '+':
+            case '-':
+                num = outputValue;
+                operator = buttonValue;
+                break;
+            case 'C':
+                num = null;
+                operator = null;
+                output.textContent = '';
+                break;
+                
+        
         }
     })
 })
