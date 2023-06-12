@@ -31,6 +31,20 @@ function operate(operator, num1, num2) {
     }
 }
 
+const buttons = document.querySelectorAll('button');
+const output = document.querySelector('.output');
+
+buttons.forEach(button => {
+    button.addEventListener('click', i => {
+        const buttonText = i.target.textContent;
+        const displayValue = output.textContent;
+
+        if (!isNaN(+buttonText)) {
+            output.textContent += buttonText;
+        }
+    })
+})
+
 // function compute(string) {
 //     arr = string.split(' ');
 //     const num1 = arr[0];
