@@ -42,7 +42,11 @@ function populateDisplay(operator, num1, num2) {
         clear();
         display.textContent = "Oy Vey!"
     } else {
-        display.textContent = operate(operator, num1, num2).toString().slice(0, 10);
+        let outputString = operate(operator, num1, num2).toString().slice(0, 10);
+        // if (outputString.endsWith('.')) {
+        //     outputString = outputString.slice(0, -1);
+        // }
+        display.textContent = outputString;
     }
 }
 
