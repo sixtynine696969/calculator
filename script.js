@@ -35,6 +35,8 @@ const output = document.querySelector('.output');
 
 let num = null;
 let operator = null;
+let lastBtnVal = null;
+let equalsPressed = false;
 
 buttons.forEach(button => {
     button.addEventListener('click', i => {
@@ -42,81 +44,39 @@ buttons.forEach(button => {
         const outputValue = output.textContent;
 
         if (!isNaN(+buttonValue)) {
-            output.textContent += buttonValue;
+            if (['-', '+', '*', '/'].includes(lastBtnVal)) {
+                output.textContent = buttonValue
+            }
+            else {
+                output.textContent += buttonValue;
+            }
         }
-
+        
         switch (buttonValue) {
             case '/':
             case '*':
             case '+':
             case '-':
-                num = outputValue
+                if (num && operator) {
+                    output.textContent = operate(operator, num, outputValue)
+                }
+                num = output.textContent;
                 operator = buttonValue;
                 break;
             case '=':
+                if (lastBtnVal == buttonValue) break;
                 output.textContent = operate(operator, num, outputValue);
                 num = null;
                 operator = null;
-                break
+                break;
+            case 'C':
+                output.textContent = '';
+                num = null;
+                operator = null;
+                lastBtnVal = null;
+                break;
+                
         }
+        lastBtnVal = buttonValue;
     })
 })
-
-// function compute(string) {
-//     arr = string.split(' ');
-//     const num1 = arr[0];
-//     const operator = arr[1];
-//     const num2 =  arr[2];
-//     return operate(operator, num1, num2);
-// }
-
-// const output = document.querySelector('.output')
-// const buttons = document.querySelectorAll('button')
-
-// let clicks = 0
-
-// buttons.forEach(btn => {
-//     btn.addEventListener('click', i => {
-        
-
-//         if (i.target.textContent == '=') {
-//             switch(true) {
-//                 case output.textContent.includes('x'):
-//                 case output.textContent.includes('/'):
-//                 case output.textContent.includes('-'):
-//                 case output.textContent.includes('+'):
-//                     output.textContent = compute(output.textContent);
-//             }
-//             return
-//         }
-        
-//         if (output.textContent.trim().split(' ').length > 2) {
-//             output.textContent = compute(output.textContent)
-//         }
-//         switch(i.target.textContent) {
-//             case '/':
-//                 output.textContent += ' / ';
-//                 break;
-//             case 'x':
-//                 output.textContent += ' x ';
-//                 break;
-//             case '-':
-//                 output.textContent += ' - ';
-//                 break;
-//             case '+':
-//                 output.textContent += ' + ';
-//                 break;
-//             default:
-//                 output.textContent += i.target.textContent;
-//                 break;
-//         }
-//     }) 
-// })
-
-// let num = '3 / 5';
-// let arr = num.split(' ');
-// let num1 = arr[0];
-// let operator = arr[1];
-// let num2 = arr[2];
-
-// console.log(operate(operator, num1, num2));
