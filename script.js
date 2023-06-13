@@ -52,7 +52,6 @@ function populateDisplay(operator, num1, num2) {
 
 function addKeyboardSupport(e) {
     const buttonValue = e.key;
-    console.log(buttonValue)
     const displayValue = display.textContent;
     const validKeys = [
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '*', '-', '/', '=', '.', 'c',
@@ -105,14 +104,7 @@ function addKeyboardSupport(e) {
     lastBtnVal = buttonValue;
 }
 
-const buttons = document.querySelectorAll('button');
-const display = document.querySelector('.display');
-
-let lastNum = null;
-let operator = null;
-let lastBtnVal = null;
-
-document.addEventListener('keydown', e => {
+function addBackspaceSupport(e) {
     const key = e.key;
     const displayValue = display.textContent;
     if (key === "Backspace") {
@@ -122,11 +114,10 @@ document.addEventListener('keydown', e => {
             display.textContent = '0';
         }
     }
-})
+}
 
-buttons.forEach(button => {
-    button.addEventListener('click', e => {
-        const buttonValue = e.target.textContent;
+function addKeypadSupport(e) {
+    const buttonValue = e.target.textContent;
         const displayValue = display.textContent;
 
         if (!isNaN(+buttonValue)) {
@@ -168,7 +159,15 @@ buttons.forEach(button => {
                 if (!displayValue.includes('.')) display.textContent += buttonValue;
         }
         lastBtnVal = buttonValue;
-    })
-})
+}
 
+const buttons = document.querySelectorAll('button');
+const display = document.querySelector('.display');
+
+let lastNum = null;
+let operator = null;
+let lastBtnVal = null;
+
+buttons.forEach(button => button.addEventListener('click', e => addKeypadSupport(e)))
+document.addEventListener('keydown', e => addBackspaceSupport(e));
 document.addEventListener('keydown', e => addKeyboardSupport(e))
