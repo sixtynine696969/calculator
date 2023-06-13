@@ -31,23 +31,23 @@ function operate(operator, num1, num2) {
 }
 
 const buttons = document.querySelectorAll('button');
-const output = document.querySelector('.output');
+const display = document.querySelector('.display');
 
-let num = null;
+let lastNum = null;
 let operator = null;
 let lastBtnVal = null;
 
 buttons.forEach(button => {
     button.addEventListener('click', i => {
         const buttonValue = i.target.textContent;
-        const outputValue = output.textContent;
+        const displayValue = display.textContent;
 
         if (!isNaN(+buttonValue)) {
             if (['-', '+', '*', '/', '='].includes(lastBtnVal)) {
-                output.textContent = buttonValue
+                display.textContent = buttonValue
             }
             else {
-                output.textContent += buttonValue;
+                display.textContent += buttonValue;
             }
         }
         
@@ -56,21 +56,21 @@ buttons.forEach(button => {
             case '*':
             case '+':
             case '-':
-                if (num && operator) {
-                    output.textContent = operate(operator, num, outputValue)
+                if (lastNum && operator) {
+                    display.textContent = operate(operator, lastNum, displayValue)
                 }
-                num = output.textContent;
+                lastNum = display.textContent;
                 operator = buttonValue;
                 break;
             case '=':
                 if (lastBtnVal == '=') break;
-                output.textContent = operate(operator, num, outputValue);
-                num = null;
+                display.textContent = operate(operator, lastNum, displayValue);
+                lastNum = null;
                 operator = null;
                 break;
             case 'C':
-                output.textContent = '';
-                num = null;
+                display.textContent = '';
+                lastNum = null;
                 operator = null;
                 lastBtnVal = null;
                 break;
