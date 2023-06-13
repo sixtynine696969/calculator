@@ -30,6 +30,22 @@ function operate(operator, num1, num2) {
     }
 }
 
+function clear() {
+    display.textContent = '0';
+    lastNum = null;
+    operator = null;
+    lastBtnVal = null;
+}
+
+function populateDisplay(operator, num1, num2) {
+    if (operator == '/' && (num1 == 0 || num2 == 0)) {
+        clear();
+        display.textContent = "Oy Vey!"
+    } else {
+        display.textContent = operate(operator, num1, num2)
+    }
+}
+
 const buttons = document.querySelectorAll('button');
 const display = document.querySelector('.display');
 
@@ -57,22 +73,19 @@ buttons.forEach(button => {
             case '+':
             case '-':
                 if (lastNum && operator && (buttonValue != lastBtnVal)) {
-                    display.textContent = operate(operator, lastNum, displayValue)
+                    populateDisplay(operator, lastNum, displayValue)
                 }
                 lastNum = display.textContent;
                 operator = buttonValue;
                 break;
             case '=':
                 if (lastBtnVal == '=') break;
-                display.textContent = operate(operator, lastNum, displayValue);
+                populateDisplay(operator, lastNum, displayValue);
                 lastNum = null;
                 operator = null;
                 break;
             case 'AC':
-                display.textContent = '0';
-                lastNum = null;
-                operator = null;
-                lastBtnVal = null;
+                clear();
                 break;
             case 'C':
                 display.textContent = '0';
