@@ -54,7 +54,6 @@ let operator = null;
 let lastBtnVal = null;
 
 document.addEventListener('keydown', e => {
-    console.log(e)
     const key = e.key;
     const displayValue = display.textContent;
     if (key === "Backspace") {
