@@ -52,13 +52,24 @@ button {
     border: 1px solid gray;
     border-radius: 3px;
 }
-
 .number {
-    background-color: lightblue;
+    background-color: rgb(180, 236, 255);
     border: 1px solid gray;
     border-radius: 3px;
 }
 
 .operator, .equal {
     background-color: rgb(248, 205, 124);
+}
+
+button:hover {
+    background-color: rgb(214, 214, 214);
+}
+
+.number:hover {
+    background-color: rgb(126, 223, 255);
+}
+
+.operator:hover, .equal:hover {
+    background-color: rgb(255, 188, 64);
 }
