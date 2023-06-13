@@ -40,7 +40,7 @@ buttons.forEach(button => {
     button.addEventListener('click', i => {
         const buttonValue = i.target.textContent;
         const outputValue = output.textContent;
-        
+
         if (!isNaN(+buttonValue)) {
             output.textContent += buttonValue;
         }
@@ -50,16 +50,14 @@ buttons.forEach(button => {
             case '*':
             case '+':
             case '-':
-                num = outputValue;
+                num = outputValue
                 operator = buttonValue;
                 break;
-            case 'C':
+            case '=':
+                output.textContent = operate(operator, num, outputValue);
                 num = null;
                 operator = null;
-                output.textContent = '';
-                break;
-                
-        
+                break
         }
     })
 })
