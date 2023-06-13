@@ -36,7 +36,6 @@ const output = document.querySelector('.output');
 let num = null;
 let operator = null;
 let lastBtnVal = null;
-let equalsPressed = false;
 
 buttons.forEach(button => {
     button.addEventListener('click', i => {
