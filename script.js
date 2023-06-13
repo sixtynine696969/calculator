@@ -42,7 +42,7 @@ function populateDisplay(operator, num1, num2) {
         clear();
         display.textContent = "Oy Vey!"
     } else {
-        display.textContent = operate(operator, num1, num2)
+        display.textContent = operate(operator, num1, num2).toString().slice(0, 10);
     }
 }
 
@@ -63,6 +63,7 @@ buttons.forEach(button => {
                 display.textContent = buttonValue
             }
             else {
+                if (display.textContent.length > 9) return;
                 display.textContent += buttonValue;
             }
         }
