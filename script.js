@@ -92,7 +92,9 @@ buttons.forEach(button => {
                 display.textContent = '0';
                 lastNum = displayValue;
                 break;
-                
+            case '.':
+                if (display.textContent.length > 9) return;
+                if (!displayValue.includes('.')) display.textContent += buttonValue;
         }
         lastBtnVal = buttonValue;
     })
