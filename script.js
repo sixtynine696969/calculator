@@ -53,6 +53,19 @@ let lastNum = null;
 let operator = null;
 let lastBtnVal = null;
 
+document.addEventListener('keydown', e => {
+    console.log(e)
+    const key = e.key;
+    const displayValue = display.textContent;
+    if (key === "Backspace") {
+        if (display.textContent.length > 1) {
+            display.textContent = displayValue.slice(0, -1);
+        } else {
+            display.textContent = '0';
+        }
+    }
+})
+
 buttons.forEach(button => {
     button.addEventListener('click', i => {
         const buttonValue = i.target.textContent;
