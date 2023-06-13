@@ -43,7 +43,7 @@ buttons.forEach(button => {
         const outputValue = output.textContent;
 
         if (!isNaN(+buttonValue)) {
-            if (['-', '+', '*', '/'].includes(lastBtnVal)) {
+            if (['-', '+', '*', '/', '='].includes(lastBtnVal)) {
                 output.textContent = buttonValue
             }
             else {
@@ -63,7 +63,7 @@ buttons.forEach(button => {
                 operator = buttonValue;
                 break;
             case '=':
-                if (lastBtnVal == buttonValue) break;
+                if (lastBtnVal == '=') break;
                 output.textContent = operate(operator, num, outputValue);
                 num = null;
                 operator = null;
