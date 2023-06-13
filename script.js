@@ -43,7 +43,7 @@ buttons.forEach(button => {
         const displayValue = display.textContent;
 
         if (!isNaN(+buttonValue)) {
-            if (['-', '+', '*', '/', '='].includes(lastBtnVal)) {
+            if (['-', '+', '*', '/', '='].includes(lastBtnVal) || (displayValue == '0')) {
                 display.textContent = buttonValue
             }
             else {
@@ -68,11 +68,15 @@ buttons.forEach(button => {
                 lastNum = null;
                 operator = null;
                 break;
-            case 'C':
-                display.textContent = '';
+            case 'AC':
+                display.textContent = '0';
                 lastNum = null;
                 operator = null;
                 lastBtnVal = null;
+                break;
+            case 'C':
+                display.textContent = '0';
+                lastNum = displayValue;
                 break;
                 
         }
