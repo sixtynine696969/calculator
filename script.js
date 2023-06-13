@@ -56,7 +56,7 @@ buttons.forEach(button => {
             case '*':
             case '+':
             case '-':
-                if (lastNum && operator) {
+                if (lastNum && operator && (buttonValue != lastBtnVal)) {
                     display.textContent = operate(operator, lastNum, displayValue)
                 }
                 lastNum = display.textContent;
