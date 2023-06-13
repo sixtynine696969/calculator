@@ -52,7 +52,8 @@ button {
     border: 1px solid gray;
     border-radius: 3px;
 }
-.number {
+
+.number, .dot {
     background-color: rgb(180, 236, 255);
     border: 1px solid gray;
     border-radius: 3px;
@@ -66,7 +67,7 @@ button:hover {
     background-color: rgb(214, 214, 214);
 }
 
-.number:hover {
+.number:hover, .dot:hover {
     background-color: rgb(126, 223, 255);
 }
 
