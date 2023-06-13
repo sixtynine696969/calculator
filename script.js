@@ -51,35 +51,36 @@ function populateDisplay(operator, num1, num2) {
 }
 
 function addKeyboardSupport(e) {
-    const buttonValue = e.key;
+    const key = e.key;
     const displayValue = display.textContent;
     const validKeys = [
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '*', '-', '/', '=', '.', 'c',
         'Escape', 'Enter', 'Backspace'
     ];
 
-    if(!validKeys.includes(buttonValue)) return;
+    if(!validKeys.includes(key)) return;
+    if (key == '/') e.preventDefault()
 
-    if (!isNaN(+buttonValue)) {
+    if (!isNaN(+key)) {
         if (['-', '+', '*', '/', '='].includes(lastBtnVal) || (displayValue == '0')) {
-            display.textContent = buttonValue
+            display.textContent = key
         }
         else {
             if (display.textContent.length > 9) return;
-            display.textContent += buttonValue;
+            display.textContent += key;
         }
     }
     
-    switch (buttonValue) {
+    switch (key) {
         case '/':
         case '*':
         case '+':
         case '-':
-            if (lastNum && operator && (buttonValue != lastBtnVal)) {
+            if (lastNum && operator && (key != lastBtnVal)) {
                 populateDisplay(operator, lastNum, displayValue)
             }
             lastNum = display.textContent;
-            operator = buttonValue;
+            operator = key;
             break;
         case '=':
         case 'Enter':
@@ -98,7 +99,7 @@ function addKeyboardSupport(e) {
             break;
         case '.':
             if (display.textContent.length > 9) return;
-            if (!displayValue.includes('.')) display.textContent += buttonValue;
+            if (!displayValue.includes('.')) display.textContent += key;
         case 'Backspace':
             if (displayValue > 1) {
                 display.textContent = displayValue.slice(0, -1);
@@ -107,7 +108,7 @@ function addKeyboardSupport(e) {
             }
 
     }
-    lastBtnVal = buttonValue;
+    lastBtnVal = key;
 }
 
 function addKeypadSupport(e) {
