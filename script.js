@@ -55,8 +55,8 @@ function addKeyboardSupport(e) {
     const displayValue = display.textContent;
     const validKeys = [
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '*', '-', '/', '=', '.', 'c',
-        'Escape', 'Enter'
-    ]
+        'Escape', 'Enter', 'Backspace'
+    ];
 
     if(!validKeys.includes(buttonValue)) return;
 
@@ -90,10 +90,61 @@ function addKeyboardSupport(e) {
             break;
         case 'AC':
         case 'Escape':
-            Escape
             clear();
             break;
         case 'c':
+            display.textContent = '0';
+            lastNum = displayValue;
+            break;
+        case '.':
+            if (display.textContent.length > 9) return;
+            if (!displayValue.includes('.')) display.textContent += buttonValue;
+        case 'Backspace':
+            if (displayValue > 1) {
+                display.textContent = displayValue.slice(0, -1);
+            } else {
+                display.textContent = '0';
+            }
+
+    }
+    lastBtnVal = buttonValue;
+}
+
+function addKeypadSupport(e) {
+    const buttonValue = e.target.textContent;
+    const displayValue = display.textContent;
+
+    if (!isNaN(+buttonValue)) {
+        if (['-', '+', '*', '/', '='].includes(lastBtnVal) || (displayValue == '0')) {
+            display.textContent = buttonValue
+        }
+        else {
+            if (display.textContent.length > 9) return;
+            display.textContent += buttonValue;
+        }
+    }
+    
+    switch (buttonValue) {
+        case '/':
+        case '*':
+        case '+':
+        case '-':
+            if (lastNum && operator && (buttonValue != lastBtnVal)) {
+                populateDisplay(operator, lastNum, displayValue)
+            }
+            lastNum = display.textContent;
+            operator = buttonValue;
+            break;
+        case '=':
+            if (lastBtnVal == '=') break;
+            populateDisplay(operator, lastNum, displayValue);
+            lastNum = null;
+            operator = null;
+            break;
+        case 'AC':
+            clear();
+            break;
+        case 'C':
             display.textContent = '0';
             lastNum = displayValue;
             break;
@@ -104,63 +155,6 @@ function addKeyboardSupport(e) {
     lastBtnVal = buttonValue;
 }
 
-function addBackspaceSupport(e) {
-    const key = e.key;
-    const displayValue = display.textContent;
-    if (key === "Backspace") {
-        if (display.textContent.length > 1) {
-            display.textContent = displayValue.slice(0, -1);
-        } else {
-            display.textContent = '0';
-        }
-    }
-}
-
-function addKeypadSupport(e) {
-    const buttonValue = e.target.textContent;
-        const displayValue = display.textContent;
-
-        if (!isNaN(+buttonValue)) {
-            if (['-', '+', '*', '/', '='].includes(lastBtnVal) || (displayValue == '0')) {
-                display.textContent = buttonValue
-            }
-            else {
-                if (display.textContent.length > 9) return;
-                display.textContent += buttonValue;
-            }
-        }
-        
-        switch (buttonValue) {
-            case '/':
-            case '*':
-            case '+':
-            case '-':
-                if (lastNum && operator && (buttonValue != lastBtnVal)) {
-                    populateDisplay(operator, lastNum, displayValue)
-                }
-                lastNum = display.textContent;
-                operator = buttonValue;
-                break;
-            case '=':
-                if (lastBtnVal == '=') break;
-                populateDisplay(operator, lastNum, displayValue);
-                lastNum = null;
-                operator = null;
-                break;
-            case 'AC':
-                clear();
-                break;
-            case 'C':
-                display.textContent = '0';
-                lastNum = displayValue;
-                break;
-            case '.':
-                if (display.textContent.length > 9) return;
-                if (!displayValue.includes('.')) display.textContent += buttonValue;
-        }
-        lastBtnVal = buttonValue;
-}
-
 const buttons = document.querySelectorAll('button');
 const display = document.querySelector('.display');
 
@@ -169,5 +163,4 @@ let operator = null;
 let lastBtnVal = null;
 
 buttons.forEach(button => button.addEventListener('click', e => addKeypadSupport(e)))
-document.addEventListener('keydown', e => addBackspaceSupport(e));
 document.addEventListener('keydown', e => addKeyboardSupport(e))
