@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.output {
+.display {
     border: 1px solid black;
     height: 20px;
 }
