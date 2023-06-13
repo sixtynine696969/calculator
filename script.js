@@ -100,12 +100,14 @@ function addKeyboardSupport(e) {
         case '.':
             if (display.textContent.length > 9) return;
             if (!displayValue.includes('.')) display.textContent += key;
+            break;
         case 'Backspace':
             if (displayValue > 1) {
                 display.textContent = displayValue.slice(0, -1);
             } else {
                 display.textContent = '0';
             }
+            break;
 
     }
     lastBtnVal = key;
@@ -152,6 +154,7 @@ function addKeypadSupport(e) {
         case '.':
             if (display.textContent.length > 9) return;
             if (!displayValue.includes('.')) display.textContent += buttonValue;
+            break;
     }
     lastBtnVal = buttonValue;
 }
