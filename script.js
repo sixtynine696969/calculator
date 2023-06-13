@@ -50,6 +50,61 @@ function populateDisplay(operator, num1, num2) {
     }
 }
 
+function addKeyboardSupport(e) {
+    const buttonValue = e.key;
+    console.log(buttonValue)
+    const displayValue = display.textContent;
+    const validKeys = [
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '*', '-', '/', '=', '.', 'c',
+        'Escape', 'Enter'
+    ]
+
+    if(!validKeys.includes(buttonValue)) return;
+
+    if (!isNaN(+buttonValue)) {
+        if (['-', '+', '*', '/', '='].includes(lastBtnVal) || (displayValue == '0')) {
+            display.textContent = buttonValue
+        }
+        else {
+            if (display.textContent.length > 9) return;
+            display.textContent += buttonValue;
+        }
+    }
+    
+    switch (buttonValue) {
+        case '/':
+        case '*':
+        case '+':
+        case '-':
+            if (lastNum && operator && (buttonValue != lastBtnVal)) {
+                populateDisplay(operator, lastNum, displayValue)
+            }
+            lastNum = display.textContent;
+            operator = buttonValue;
+            break;
+        case '=':
+        case 'Enter':
+            if (lastBtnVal == '=') break;
+            populateDisplay(operator, lastNum, displayValue);
+            lastNum = null;
+            operator = null;
+            break;
+        case 'AC':
+        case 'Escape':
+            Escape
+            clear();
+            break;
+        case 'c':
+            display.textContent = '0';
+            lastNum = displayValue;
+            break;
+        case '.':
+            if (display.textContent.length > 9) return;
+            if (!displayValue.includes('.')) display.textContent += buttonValue;
+    }
+    lastBtnVal = buttonValue;
+}
+
 const buttons = document.querySelectorAll('button');
 const display = document.querySelector('.display');
 
@@ -70,8 +125,8 @@ document.addEventListener('keydown', e => {
 })
 
 buttons.forEach(button => {
-    button.addEventListener('click', i => {
-        const buttonValue = i.target.textContent;
+    button.addEventListener('click', e => {
+        const buttonValue = e.target.textContent;
         const displayValue = display.textContent;
 
         if (!isNaN(+buttonValue)) {
@@ -115,3 +170,5 @@ buttons.forEach(button => {
         lastBtnVal = buttonValue;
     })
 })
+
+document.addEventListener('keydown', e => addKeyboardSupport(e))
