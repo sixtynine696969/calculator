@@ -76,6 +76,9 @@ function addKeyboardSupport(e) {
         case '*':
         case '+':
         case '-':
+            if (displayValue.endsWith('.')) {
+                display.textContent = displayValue.slice(0, -1);
+            }
             if (lastNum && operator && (key != lastBtnVal)) {
                 populateDisplay(operator, lastNum, displayValue)
             }
@@ -132,6 +135,9 @@ function addKeypadSupport(e) {
         case '*':
         case '+':
         case '-':
+            if (displayValue.endsWith('.')) {
+                display.textContent = displayValue.slice(0, -1);
+            }
             if (lastNum && operator && (buttonValue != lastBtnVal)) {
                 populateDisplay(operator, lastNum, displayValue)
             }
